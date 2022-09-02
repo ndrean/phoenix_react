@@ -1,6 +1,6 @@
 # PhoenixReact
 
-npm create vite@latest frontend -- --template react
+npm create vite@latest front -- --template react
 
 mix phx.gen.secret
 

@@ -12,8 +12,8 @@ defmodule Mix.Tasks.Webapp do
 
   @impl Mix.Task
   def run(_) do
-    Logger.info("📦 - Installing NPM packages")
-    System.cmd("npm", ["install", "--quiet"], cd: "./frontend")
+    # Logger.info("📦 - Installing NPM packages")
+    # System.cmd("npm", ["install", "--quiet"], cd: "./frontend")
 
     Logger.info("⚙️  - Compiling React frontend")
     System.cmd("npm", ["run", "build"], cd: "./frontend")
