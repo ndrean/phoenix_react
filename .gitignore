@@ -37,3 +37,6 @@ npm-debug.log
 .formatter.elixir_js
 /frontend/dist/
 /frontend/node_modules/
+.credo.exs
+/priv/static/
+.gitignore

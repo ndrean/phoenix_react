@@ -8,6 +8,7 @@ defmodule PhoenixReact.Application do
   @impl true
   def start(_type, _args) do
     children = [
+      PhoenixReact.Counter,
       # Start the Ecto repository
       PhoenixReact.Repo,
       # Start the Telemetry supervisor

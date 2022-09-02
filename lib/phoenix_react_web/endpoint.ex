@@ -10,7 +10,16 @@ defmodule PhoenixReactWeb.Endpoint do
     signing_salt: "CXmZBaOt"
   ]
 
-  socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]]
+  socket "/socket", PhoenixReactWeb.UserSocket,
+    websocket: true,
+    longpoll: false
+
+  socket "/live", Phoenix.LiveView.Socket,
+    websocket: [
+      connect_info: [
+        session: @session_options
+      ]
+    ]
 
   # Serve at "/" the static files from "priv/static" directory.
   #
@@ -20,11 +29,13 @@ defmodule PhoenixReactWeb.Endpoint do
     at: "/",
     from: :phoenix_react,
     # <=
+    # headers: [{"access-control-allow-origin", "*"}],
     gzip: Mix.env() == :prod,
     only: ~w(assets fonts images webapp favicon.ico robots.txt)
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
+
   if code_reloading? do
     socket "/phoenix/live_reload/socket", Phoenix.LiveReloader.Socket
     plug Phoenix.LiveReloader

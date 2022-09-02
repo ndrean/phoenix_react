@@ -13,6 +13,7 @@ config :phoenix_react,
 # Configures the endpoint
 config :phoenix_react, PhoenixReactWeb.Endpoint,
   url: [host: "localhost", compress: Mix.env() == :prod],
+  # cache_static_manifest: "priv/static/manigeset.json",
   render_errors: [view: PhoenixReactWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: PhoenixReact.PubSub,
   live_view: [signing_salt: "dz9Zr8V+"]

@@ -3,6 +3,7 @@ defmodule PhoenixReactWeb.WebAppController do
 
   def index(conn, _params) do
     IO.inspect(Application.app_dir(:phoenix_react), label: "app_dir :")
+    IO.inspect(Path.expand("priv/static"), label: "expand")
 
     conn
     |> send_resp(
