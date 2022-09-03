@@ -2,7 +2,6 @@ import React from "react";
 import { useState } from "react";
 import { useChannel } from "./channel";
 import { BrowserRouter, Link, Routes, Route } from "react-router-dom";
-
 import reactLogo from "./assets/react.svg";
 import phoenixLogo from "./assets/phoenix.svg";
 import viteLogo from "./assets/vite.svg";
@@ -22,7 +21,7 @@ const liStyle = {
   borderRadius: "10px",
 };
 
-function App() {
+function App({ socket }) {
   return (
     <BrowserRouter basename="app">
       <nav style={navStyle}>
@@ -37,26 +36,29 @@ function App() {
               Page
             </Link>
           </li>
+          <li>
+            <a href="http://localhost:4000" style={liStyle}>
+              Phoenix API
+            </a>
+          </li>
         </ul>
         <br />
       </nav>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="p" element={<Page />} />
+        <Route path="/" element={<Home socket={socket} />} />
+        <Route path="p" element={<Page socket={socket} />} />
       </Routes>
     </BrowserRouter>
   );
 }
 
-function Home() {
+function Home({ socket }) {
   const [count, setCount] = useState(0);
   const [msg, setMsg] = useState(0);
 
-  function myCallback(resp) {
-    setMsg(resp.count);
-  }
+  const myCallback = (resp) => setMsg(resp.count);
 
-  const channel = useChannel("counter:lobby", "shout", myCallback);
+  const channel = useChannel(socket, "counter:lobby", "shout", myCallback);
 
   function handleClick() {
     setCount((count) => count + 1);
@@ -88,13 +90,13 @@ function Home() {
   );
 }
 
-function Page() {
+function Page({ socket }) {
   const [msg, setMsg] = useState(0);
 
   function myCallback(resp) {
     setMsg(resp.count);
   }
-  useChannel("counter:lobby", "shout", myCallback);
+  useChannel(socket, "counter:lobby", "shout", myCallback);
 
   return <h1>Page: {msg}</h1>;
 }

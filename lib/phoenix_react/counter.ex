@@ -4,7 +4,7 @@ defmodule PhoenixReact.Counter do
   """
   use GenServer
 
-  @topic "counter:lobb"
+  @topic "counter:lobby"
   @event "shout"
 
   def start_link(_opts) do
@@ -22,7 +22,7 @@ defmodule PhoenixReact.Counter do
   # this response: to send msg from GS to a channel, use the channel topic
   # https://elixirforum.com/t/connecting-to-channel-from-within-application/37133
   @impl true
-  def handle_info({:shout, 1}, state) do
+  def handle_info({@event, 1}, state) do
     state = state + 1
     PhoenixReactWeb.Endpoint.broadcast_from(self(), @topic, @event, %{count: state})
     {:noreply, state}
