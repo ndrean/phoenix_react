@@ -4,6 +4,9 @@ defmodule PhoenixReact.Counter do
   """
   use GenServer
 
+  @topic "counter:lobb"
+  @event "shout"
+
   def start_link(_opts) do
     GenServer.start_link(__MODULE__, 0, name: __MODULE__)
   end
@@ -21,7 +24,7 @@ defmodule PhoenixReact.Counter do
   @impl true
   def handle_info({:shout, 1}, state) do
     state = state + 1
-    PhoenixReactWeb.Endpoint.broadcast_from(self(), "counter:lobby", "shout", %{count: state})
+    PhoenixReactWeb.Endpoint.broadcast_from(self(), @topic, @event, %{count: state})
     {:noreply, state}
   end
 end
