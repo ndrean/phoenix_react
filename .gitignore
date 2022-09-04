@@ -39,3 +39,6 @@ npm-debug.log
 .credo.exs
 /priv/static/
 .gitignore
+.dockerignore
+.env-export
+.env
