@@ -1,5 +1,6 @@
 defmodule PhoenixReactWeb.UserSocket do
   use Phoenix.Socket
+  require Logger
 
   # A Socket handler
   #
@@ -21,9 +22,31 @@ defmodule PhoenixReactWeb.UserSocket do
   #
   # See `Phoenix.Token` documentation for examples in
   # performing token verification on connect.
+  # def connect(_, socket, _) do
+  #   {:ok, socket}
+  # end
+
   @impl true
-  def connect(_params, socket, _connect_info) do
-    {:ok, socket}
+  def connect(%{"token" => token} = _params, socket, _info) do
+    case verify(socket, token) do
+      {:ok, user_name} ->
+        socket = assign(socket, user_name: user_name, user_token: token)
+        {:ok, socket}
+
+      {:error, err} ->
+        Logger.error("#{__MODULE__}: error: #{inspect(err)}")
+        :error
+    end
+  end
+
+  @impl true
+  def connect(_, _socket, _) do
+    Logger.error("#{__MODULE__}: missing params")
+    :error
+  end
+
+  defp verify(_socket, token) do
+    Phoenix.Token.verify(PhoenixReactWeb.Endpoint, "user token", token, max_age: 86_400)
   end
 
   # Socket id's are topics that allow you to identify all sockets for a given user:

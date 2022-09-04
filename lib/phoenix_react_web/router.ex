@@ -10,19 +10,12 @@ defmodule PhoenixReactWeb.Router do
     plug :put_secure_browser_headers
   end
 
-  pipeline :api do
-    plug :accepts, ["json"]
-  end
-
   scope "/", PhoenixReactWeb do
-    pipe_through :browser
+    pipe_through [:browser]
 
     get "/", PageController, :index
-    # live "/", HomeLive
-  end
-
-  scope "/app", PhoenixReactWeb do
-    get "/", ReactController, :index
+    get "/auth/github/callback", GithubAuthController, :index
+    get "/react", ReactController, :index
   end
 
   # Other scopes may use custom stacks.
@@ -44,18 +37,6 @@ defmodule PhoenixReactWeb.Router do
       pipe_through :browser
 
       live_dashboard "/dashboard", metrics: PhoenixReactWeb.Telemetry
-    end
-  end
-
-  # Enables the Swoosh mailbox preview in development.
-  #
-  # Note that preview only shows emails that were sent by the same
-  # node running the Phoenix server.
-  if Mix.env() == :dev do
-    scope "/dev" do
-      pipe_through :browser
-
-      forward "/mailbox", Plug.Swoosh.MailboxPreview
     end
   end
 end

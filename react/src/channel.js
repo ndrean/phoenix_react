@@ -1,6 +1,7 @@
 import React from "react";
+import { socket } from "./main";
 
-const useChannel = (socket, topic, evt, callback) => {
+const useChannel = (topic, evt, callback) => {
   const [channel, setChannel] = React.useState(null);
   React.useEffect(() => {
     const myChannel = socket.channel(topic, {});
@@ -16,7 +17,6 @@ const useChannel = (socket, topic, evt, callback) => {
       myChannel.leave();
     };
   }, []);
-
   return channel;
 };
 

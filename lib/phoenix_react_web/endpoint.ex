@@ -28,10 +28,9 @@ defmodule PhoenixReactWeb.Endpoint do
   plug Plug.Static,
     at: "/",
     from: :phoenix_react,
-    # <=
-    # headers: [{"access-control-allow-origin", "*"}],
+    headers: [{"access-control-allow-origin", "*"}],
     gzip: Mix.env() == :prod,
-    only: ~w(assets fonts images  react favicon.ico robots.txt)
+    only: ~w(assets fonts images react favicon.ico robots.txt)
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.

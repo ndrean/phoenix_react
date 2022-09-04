@@ -20,7 +20,7 @@ defmodule PhoenixReactWeb.CounterChannel do
   end
 
   @impl true
-  def handle_in("count", %{"count" => _count} = _payload, socket) do
+  def handle_in("count", _p, socket) do
     send(PhoenixReact.Counter, {@event, 1})
     {:noreply, socket}
   end
