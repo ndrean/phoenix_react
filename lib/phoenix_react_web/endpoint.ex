@@ -28,7 +28,8 @@ defmodule PhoenixReactWeb.Endpoint do
   plug Plug.Static,
     at: "/",
     from: :phoenix_react,
-    headers: [{"access-control-allow-origin", "*"}],
+    # headers: [{"access-control-allow-origin", "*"}],
+    check_origin: ["http://127.0.0.1"],
     gzip: Mix.env() == :prod,
     only: ~w(assets fonts images react favicon.ico robots.txt)
 

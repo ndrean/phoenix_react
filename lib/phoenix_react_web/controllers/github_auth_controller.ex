@@ -10,6 +10,7 @@ defmodule PhoenixReactWeb.GithubAuthController do
 
     conn
     |> put_session(:user_token, user_token)
+    |> put_session(:profile, profile)
     |> put_view(PhoenixReactWeb.PageView)
     |> render(:welcome, profile: profile)
   end

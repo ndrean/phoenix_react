@@ -30,6 +30,7 @@ defmodule PhoenixReactWeb.UserSocket do
   def connect(%{"token" => token} = _params, socket, _info) do
     case verify(socket, token) do
       {:ok, user_name} ->
+        Logger.debug(token)
         socket = assign(socket, user_name: user_name, user_token: token)
         {:ok, socket}
 

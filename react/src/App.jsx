@@ -2,7 +2,6 @@ import React from "react";
 import { useState } from "react";
 import { useChannel } from "./channel";
 import { BrowserRouter, Link, Routes, Route } from "react-router-dom";
-
 import reactLogo from "./assets/react.svg";
 import phoenixLogo from "./assets/phoenix.svg";
 import viteLogo from "./assets/vite.svg";
@@ -14,6 +13,7 @@ const ulStyle = {
   listStyleType: "none",
   justifyContent: "space-around",
   gap: "30px",
+  width: "80%",
 };
 const liStyle = {
   display: "inline",
@@ -90,6 +90,8 @@ function Home() {
       <div className="card">
         <button onClick={handleClick}>count is {count}</button>
       </div>
+      <p>CSRF Token: {window.csrfToken}</p>
+      <p>User token: {window.userToken}</p>
     </div>
   );
 }

@@ -6,11 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="csrf-token" content={csrf_token_value()}>
     <%= live_title_tag assigns[:page_title] || "PhoenixReact", suffix: " · Phoenix Framework" %>
-    <%# <script src={Routes.static_path(@conn, "/assets/app.js")}></script> %>
     <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/app.css")}/>
     <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/app.js")}></script>
-    <%# <script type="module" crossorigin src="/webapp/assets/index.f2588a17.js"></script>
-    <link rel="stylesheet" href="/webapp/assets/index.3dd79a12.css"> %>
   </head>
   <body>
     <header>
@@ -26,9 +23,11 @@
         <a href="https://phoenixframework.org/" class="phx-logo">
           <img src={Routes.static_path(@conn, "/images/phoenix.svg")} alt="Phoenix Framework Logo"/>
         </a>
+        <span class="phx-logo">
         <%= link to: Routes.react_path(@conn, :index) do %>
           <img src={Routes.static_path(@conn,"/images/react.svg")} alt="react logo" />
         <% end %>
+        </span>
       </section>
     </header>
     <%= @inner_content %>
