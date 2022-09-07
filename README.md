@@ -74,3 +74,5 @@ Parameters: %{"token" => "sfkmskfsmfksmldf"
 ## Github pages CDN
 
 <https://ndrean.github.io/phoenix_react_static/>
+
+<https://github.com/gitname/react-gh-pages>
