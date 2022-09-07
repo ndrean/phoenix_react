@@ -1,5 +1,6 @@
 defmodule PhoenixReactWeb.PageController do
   use PhoenixReactWeb, :controller
+  require Logger
 
   @doc """
   Renders the Github login
@@ -11,6 +12,7 @@ defmodule PhoenixReactWeb.PageController do
       %{"profile" => profile} ->
         conn
         |> put_view(PhoenixReactWeb.PageView)
+        |> tap(fn conn -> Logger.info(conn) end)
         |> render(:welcome, profile: profile)
 
       _ ->

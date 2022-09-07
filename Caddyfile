@@ -1,0 +1,22 @@
+# { 
+#     debug
+# }
+
+(common) {
+    header /* {
+        -Server
+    }
+}
+
+http://localhost:80 {
+    reverse_proxy  http://phx:4000
+
+    # import common
+    encode gzip
+    file_server /react/* 
+    
+    log {
+        output stdout
+        format console
+    }
+}

@@ -64,7 +64,7 @@ Parameters: %{"token" => "sfkmskfsmfksmldf"
 
 ## Compression:
 
-- config endpoint http:[comporess: true]
+- config endpoint http:[compress: true]
 - Plug.Static, gzip: Mix.evn == :prod
 
 ## Black hole
@@ -74,3 +74,37 @@ Parameters: %{"token" => "sfkmskfsmfksmldf"
 ## Github pages CDN
 
 <https://ndrean.github.io/phoenix_react_static/>
+
+## GIT TIP
+
+## Chart.js
+
+chartRef = React.createRef()
+return (
+
+<div className={classes.graphContainer}>
+<canvas id="myChart" ref={this.chartRef}/>
+</div>
+)
+
+Origin of the request: http://localhost:4000
+phx_1 |
+phx_1 | This happens when you are attempting a socket connection to
+phx_1 | a different host than the one configured in your config/
+phx_1 | files. For example, in development the host is configured
+phx_1 | to "localhost" but you may be trying to access it from
+phx_1 | "127.0.0.1". To fix this issue, you may either:
+phx_1 |
+phx_1 | 1. update [url: [host: ...]] to your actual host in the
+phx_1 | config file for your current environment (recommended)
+phx_1 |
+phx_1 | 2. pass the :check_origin option when configuring your
+phx_1 | endpoint or when configuring the transport in your
+phx_1 | UserSocket module, explicitly outlining which origins
+phx_1 | are allowed:
+phx_1 |
+phx_1 | check_origin: ["https://example.com",
+phx_1 | "//another.com:888", "//other.com"]
+phx_1 |
+phx_1 |
+phx_1 | 08:36:50.559 [error] Could not check origin for Phoenix.Socket transport.

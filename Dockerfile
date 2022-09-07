@@ -4,7 +4,8 @@ ARG MIX_ENV="prod"
 FROM hexpm/elixir:1.12.3-erlang-24.1.2-alpine-3.14.2 AS build
 
 # install build dependencies
-RUN apk add --no-cache build-base git python3 curl
+RUN apk add --no-cache build-base git python3 curl 
+# npm
 
 # sets work dir
 WORKDIR /app
@@ -26,7 +27,7 @@ COPY config/config.exs config/$MIX_ENV.exs config/
 
 # compile dependencies
 RUN mix deps.compile
-
+# RUN mix react
 # copy assets
 COPY priv priv
 COPY assets assets
@@ -47,12 +48,15 @@ RUN mix release
 # app stage
 FROM alpine:3.14.2 AS app
 
-ARG MIX_ENV
+ARG MIX_ENV="prod"
 
 # install runtime dependencies
 RUN apk add --no-cache libstdc++ openssl ncurses-libs
 
 ENV USER="elixir"
+ARG PHX_SERVER
+ARG DATABASE_URL
+
 
 WORKDIR "/home/${USER}/app"
 
@@ -78,6 +82,7 @@ COPY --from=build --chown="${USER}":"${USER}" /app/_build/"${MIX_ENV}"/rel/phoen
 ENTRYPOINT ["bin/phoenix_react"]
 
 CMD ["start"]
+# CMD ["sh", "-c", "bin/phoenix_react eval PhoenixReact.Release.migrate && bin/app start"]
 
 
 

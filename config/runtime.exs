@@ -49,7 +49,7 @@ if config_env() == :prod do
       """
 
   host = System.get_env("PHX_HOST") || "localhost"
-  port = String.to_integer(System.get_env("PORT") || "4000")
+  port = String.to_integer(System.get_env("PORT") || "80")
 
   config :phoenix_react, PhoenixReactWeb.Endpoint,
     # url: [host: host, port: 443, scheme: "https"],
@@ -60,9 +60,14 @@ if config_env() == :prod do
       # See the documentation on https://hexdocs.pm/plug_cowboy/Plug.Cowboy.html
       # for details about using IPv6 vs IPv4 and loopback vs public addresses.
       ip: {0, 0, 0, 0, 0, 0, 0, 0},
-      port: port
+      port: 4000
     ],
-    secret_key_base: secret_key_base
+    check_origin: [
+      "http://localhost:4000",
+      "http://localhost"
+    ],
+    secret_key_base: secret_key_base,
+    cache_static_manifest: "priv/static/cache_manifest.json"
 
   # ## Configuring the mailer
   #

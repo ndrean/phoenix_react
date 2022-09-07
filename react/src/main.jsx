@@ -4,7 +4,7 @@ import App from "./App";
 import "./index.css";
 import { Socket } from "phoenix";
 
-const socket = new Socket("ws://localhost:4000/socket", {
+const socket = new Socket("ws://localhost/socket", {
   params: { token: window.userToken },
 });
 socket.connect();

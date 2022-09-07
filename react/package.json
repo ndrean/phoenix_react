@@ -6,7 +6,7 @@
   "homepage": "https://ndrean.github.io/phoenix_react_static",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build --base=/react/",
     "preview": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"

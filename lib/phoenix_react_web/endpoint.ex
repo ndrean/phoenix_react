@@ -22,15 +22,14 @@ defmodule PhoenixReactWeb.Endpoint do
     ]
 
   # Serve at "/" the static files from "priv/static" directory.
-  #
   # You should set gzip to true if you are running phx.digest
   # when deploying your static files in production.
   plug Plug.Static,
     at: "/",
     from: :phoenix_react,
     # headers: [{"access-control-allow-origin", "*"}],
-    check_origin: ["http://127.0.0.1"],
-    gzip: Mix.env() == :prod,
+    encodings: [{"gzip", ".gz"}],
+    cache_control_for_etags: "public, max-age = 31_536_00",
     only: ~w(assets fonts images react favicon.ico robots.txt)
 
   # Code reloading can be explicitly enabled under the
