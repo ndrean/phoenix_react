@@ -104,7 +104,7 @@ function Page() {
 
   useChannel("counter:lobby", "shout", myCallback);
 
-  return <h1>Page: {msg}</h1>;
+  return <h1>Total clicks received: {msg}</h1>;
 }
 
 export default App;
