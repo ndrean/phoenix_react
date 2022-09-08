@@ -2,7 +2,7 @@ defmodule PhoenixReactWeb.ReactController do
   use PhoenixReactWeb, :controller
   require Logger
 
-  @react_dir "./priv/static/react/"
+  @react_dir "/priv/static/react/"
   @title "    <title>React</title>\n"
 
   defp read_line(:eof, file, _token), do: file
@@ -24,7 +24,7 @@ defmodule PhoenixReactWeb.ReactController do
         token = "<script>window.userToken = \"#{user_token}\"</script>\n"
 
         try do
-          # (@react_dir <> "index.html")
+          # ("." <> @react_dir <> "index.html")
           (Application.app_dir(:phoenix_react) <> "/" <> @react_dir <> "index.html")
           |> File.stream!([], :line)
           # |> Enum.reduce("", fn l, file ->
