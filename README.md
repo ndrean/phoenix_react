@@ -6,11 +6,6 @@ mix phx.gen.secret
 
 MIX "dotenv": just put secrets in ".env" and it works :)
 
-export SECRET_KEY_BASE=B41pUFgfTJeEUpt+6TwSkbrxlAb9uibgIemaYbm1Oq+XdZ3Q96LcaW9sarbGfMhy
-export DATABASE_URL=ecto://postgres:postgres@localhost/phoenix_react_dev
-PHX_HOST=4000
-PHX_SERVER=true
-
 mix deps.get --only prod
 MIX_ENV=prod mix compile
 mix webapp
@@ -64,7 +59,7 @@ Parameters: %{"token" => "sfkmskfsmfksmldf"
 
 ## Compression:
 
-- config endpoint http:[comporess: true]
+- config endpoint http:[compress: true]
 - Plug.Static, gzip: Mix.evn == :prod
 
 ## Black hole
@@ -74,3 +69,47 @@ Parameters: %{"token" => "sfkmskfsmfksmldf"
 ## Github pages CDN
 
 <https://ndrean.github.io/phoenix_react_static/>
+
+## GIT TIP
+
+`git reflog` to get the history,
+If you want to return to a given commit, grab the ID and run:
+`git reset -hard id`
+
+## Chart.js
+
+chartRef = React.createRef()
+return (
+
+<div className={classes.graphContainer}>
+<canvas id="myChart" ref={this.chartRef}/>
+</div>
+)
+
+Origin of the request: http://localhost:4000
+phx_1 |
+phx_1 | This happens when you are attempting a socket connection to
+phx_1 | a different host than the one configured in your config/
+phx_1 | files. For example, in development the host is configured
+phx_1 | to "localhost" but you may be trying to access it from
+phx_1 | "127.0.0.1". To fix this issue, you may either:
+phx_1 |
+phx_1 | 1. update [url: [host: ...]] to your actual host in the
+phx_1 | config file for your current environment (recommended)
+phx_1 |
+phx_1 | 2. pass the :check_origin option when configuring your
+phx_1 | endpoint or when configuring the transport in your
+phx_1 | UserSocket module, explicitly outlining which origins
+phx_1 | are allowed:
+phx_1 |
+phx_1 | check_origin: ["https://example.com",
+phx_1 | "//another.com:888", "//other.com"]
+phx_1 |
+phx_1 |
+phx_1 | 08:36:50.559 [error] Could not check origin for Phoenix.Socket transport.
+
+// "build": "vite build --base=/react/",
+
+## Caddy
+
+<https://caddyserver.com/docs/caddyfile/directives/handle#examples>

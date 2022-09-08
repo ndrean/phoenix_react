@@ -1,0 +1,18 @@
+# { 
+#     debug
+# }
+
+
+:80 {
+	log
+	encode gzip
+  
+	handle_path /react/* {
+		root * /srv
+		file_server
+	}
+
+	handle {
+		reverse_proxy phx:4000
+	}
+}

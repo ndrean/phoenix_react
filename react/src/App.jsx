@@ -40,7 +40,7 @@ function App() {
             </Link>
           </li>
           <li>
-            <a href="http://localhost:4000" style={liStyle}>
+            <a href="http://localhost:80" style={liStyle}>
               Phoenix API
             </a>
           </li>
@@ -66,7 +66,7 @@ function Home() {
 
   function handleClick() {
     setCount((count) => count + 1);
-    channel.push("count", { count: count + 1 });
+    if (channel) channel.push("count", { count: count + 1 });
   }
 
   return (
@@ -78,7 +78,7 @@ function Home() {
         <a href="https://reactjs.org" target="_blank">
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
-        <a href="http://localhost:4000" title="phoenix">
+        <a href="http://localhost" title="phoenix">
           <img src={phoenixLogo} className="logo" alt="Phoenix logo" />
         </a>
         <p className="read-the-docs">Click on the Phoenix logo to go the API</p>
@@ -90,7 +90,6 @@ function Home() {
       <div className="card">
         <button onClick={handleClick}>count is {count}</button>
       </div>
-      <p>CSRF Token: {window.csrfToken}</p>
       <p>User token: {window.userToken}</p>
     </div>
   );
@@ -102,9 +101,10 @@ function Page() {
   function myCallback(resp) {
     setMsg(resp.count);
   }
+
   useChannel("counter:lobby", "shout", myCallback);
 
-  return <h1>Page: {msg}</h1>;
+  return <h1>Total clicks received: {msg}</h1>;
 }
 
 export default App;

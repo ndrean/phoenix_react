@@ -33,12 +33,14 @@ npm-debug.log
 /assets/node_modules/
 /react/node_modules/
 
-.elixir_js
 .DS_Store
-.formatter.elixir_js
+.formatter.exs
+.elixir_ls
 .credo.exs
 /priv/static/
 .gitignore
 .dockerignore
 .env-export
 .env
+.env-docker
+.gitignore

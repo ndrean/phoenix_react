@@ -1,5 +1,6 @@
 defmodule PhoenixReactWeb.PageController do
   use PhoenixReactWeb, :controller
+  require Logger
 
   @doc """
   Renders the Github login
