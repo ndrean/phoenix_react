@@ -6,11 +6,6 @@ mix phx.gen.secret
 
 MIX "dotenv": just put secrets in ".env" and it works :)
 
-export SECRET_KEY_BASE=B41pUFgfTJeEUpt+6TwSkbrxlAb9uibgIemaYbm1Oq+XdZ3Q96LcaW9sarbGfMhy
-export DATABASE_URL=ecto://postgres:postgres@localhost/phoenix_react_dev
-PHX_HOST=4000
-PHX_SERVER=true
-
 mix deps.get --only prod
 MIX_ENV=prod mix compile
 mix webapp
@@ -77,6 +72,10 @@ Parameters: %{"token" => "sfkmskfsmfksmldf"
 
 ## GIT TIP
 
+`git reflog` to get the history,
+If you want to return to a given commit, grab the ID and run:
+`git reset -hard id`
+
 ## Chart.js
 
 chartRef = React.createRef()
@@ -108,3 +107,9 @@ phx_1 | "//another.com:888", "//other.com"]
 phx_1 |
 phx_1 |
 phx_1 | 08:36:50.559 [error] Could not check origin for Phoenix.Socket transport.
+
+// "build": "vite build --base=/react/",
+
+## Caddy
+
+<https://caddyserver.com/docs/caddyfile/directives/handle#examples>

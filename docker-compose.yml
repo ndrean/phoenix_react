@@ -3,7 +3,7 @@ services:
   phx:
     build: .
     ports:
-      - "4000"
+      - "4000:4000"
     depends_on:
       - db
     env_file:
@@ -31,7 +31,7 @@ services:
       # - "443:443/udp"
     volumes:
       - $PWD/Caddyfile:/etc/caddy/Caddyfile:ro
-      - $PWD/priv/static/react/:/srv
+      - $PWD/priv/static/react/:/srv/:ro
       - caddy_data:/data
       - caddy_config:/config
 

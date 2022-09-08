@@ -12,7 +12,6 @@ defmodule PhoenixReactWeb.PageController do
       %{"profile" => profile} ->
         conn
         |> put_view(PhoenixReactWeb.PageView)
-        |> tap(fn conn -> Logger.info(conn) end)
         |> render(:welcome, profile: profile)
 
       _ ->

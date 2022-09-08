@@ -13,8 +13,7 @@ defmodule PhoenixReactWeb.GithubAuthController do
     |> put_resp_cookie("user_token", %{user_token: user_token}, sign: true)
     |> put_session(:user_token, user_token)
     |> put_session(:profile, profile)
-    |> put_view(PhoenixReactWeb.PageView)
-    |> tap(fn conn -> Logger.info(conn) end)
-    |> render(:welcome, profile: profile)
+    |> redirect(external: "http://localhost")
+    |> halt()
   end
 end
