@@ -23,17 +23,39 @@ defmodule PhoenixReactWeb.ReactController do
 
         token = "<script>window.userToken = \"#{user_token}\"</script>\n"
 
-        # (@react_dir <> "index.html")
-        (Application.app_dir(:phoenix_react) <> "/" <> @react_dir <> "index.html")
-        |> File.stream!([], :line)
-        |> Enum.reduce("", fn l, file ->
-          read_line(l, file, token)
-        end)
-        |> then(fn file -> html(conn, file) end)
+        try do
+          # (@react_dir <> "index.html")
+          (Application.app_dir(:phoenix_react) <> "/" <> @react_dir <> "index.html")
+          |> File.stream!([], :line)
+          # |> Enum.reduce("", fn l, file ->
+          #   read_line(l, file, token)
+          # end)
+          |> Enum.reduce("", &read_line(&1, &2, token))
+          |> then(fn file -> html(conn, file) end)
+        rescue
+          e in File.Error ->
+            Logger.error("#{__MODULE__}: #{inspect(e)}")
+            return(conn, "Internal error")
+            # conn
+            # |> put_flash(:error, "File error")
+            # |> redirect(to: Routes.page_path(conn, :index))
+            # |> halt()
+        end
 
       false ->
         Logger.error("Need to login to access here")
-        conn |> redirect(to: Routes.page_path(conn, :index)) |> halt()
+        return(conn, "Need to login to access here")
+        # conn
+        # |> put_flash(:error, "You need to login to access here")
+        # |> redirect(to: Routes.page_path(conn, :index))
+        # |> halt()
     end
+  end
+
+  defp return(conn, message) do
+    conn
+    |> put_flash(:error, "#{message}")
+    |> redirect(to: Routes.page_path(conn, :index))
+    |> halt()
   end
 end
