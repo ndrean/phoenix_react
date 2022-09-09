@@ -1,0 +1,1 @@
+import{r,j as a}from"./index.246cba40.js";import{u as c}from"./channel.e5e9a602.js";function l(){const[t,e]=r.exports.useState(0);function s(o){e(o.count)}return c("counter:lobby","shout",s),a("h1",{children:["Total clicks received: ",t]})}export{l as default};

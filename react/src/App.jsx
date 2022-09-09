@@ -22,7 +22,21 @@ const liStyle = {
   borderRadius: "10px",
 };
 
-function App() {
+const LHome = React.lazy(() => import("./Home"));
+const SLHome = () => (
+  <React.Suspense fallback={<p>L</p>}>
+    <LHome />
+  </React.Suspense>
+);
+
+const LPage = React.lazy(() => import("./Page"));
+const SLPage = () => (
+  <React.Suspense fallback={<p>L</p>}>
+    <LPage />
+  </React.Suspense>
+);
+
+export default function App() {
   // const params = new URLSearchParams(window.location.pathname);
   // console.log(params);
   return (
@@ -49,62 +63,9 @@ function App() {
       <br />
       <hr />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="p" element={<Page />} />
+        <Route path="/" element={<SLHome />} />
+        <Route path="p" element={<SLPage />} />
       </Routes>
     </BrowserRouter>
   );
 }
-
-function Home() {
-  const [count, setCount] = useState(0);
-  const [msg, setMsg] = useState(0);
-
-  const myCallback = (resp) => setMsg(resp.count);
-
-  const channel = useChannel("counter:lobby", "shout", myCallback);
-
-  function handleClick() {
-    setCount((count) => count + 1);
-    if (channel) channel.push("count", { count: count + 1 });
-  }
-
-  return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-        <a href="http://localhost" title="phoenix">
-          <img src={phoenixLogo} className="logo" alt="Phoenix logo" />
-        </a>
-        <p className="read-the-docs">Click on the Phoenix logo to go the API</p>
-        <hr />
-      </div>
-      <h1>Phoenix, React, Vite</h1>
-      <hr />
-      <div className="card">Total clicks received: {msg}</div>
-      <div className="card">
-        <button onClick={handleClick}>count is {count}</button>
-      </div>
-      <p>User token: {window.userToken}</p>
-    </div>
-  );
-}
-
-function Page() {
-  const [msg, setMsg] = useState(0);
-
-  function myCallback(resp) {
-    setMsg(resp.count);
-  }
-
-  useChannel("counter:lobby", "shout", myCallback);
-
-  return <h1>Total clicks received: {msg}</h1>;
-}
-
-export default App;

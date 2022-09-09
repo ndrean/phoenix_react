@@ -59,7 +59,7 @@ if config_env() == :prod do
       port: 4000
     ],
     check_origin: [
-      # "http://localhost:4000",
+      "http://localhost:4000",
       "http://localhost"
     ],
     secret_key_base: secret_key_base,

@@ -1,0 +1,1 @@
+import{R as n,s as l}from"./index.246cba40.js";const r=(o,s,c)=>{const[t,a]=n.useState(null);return n.useEffect(()=>{if(!l)return null;const e=l.channel(o,{});return e.join().receive("ok",()=>{console.log("Joined successfully"),a(e)}),e.on(s,c),()=>{console.log("closing channel"),e.leave()}},[]),t};export{r as u};
