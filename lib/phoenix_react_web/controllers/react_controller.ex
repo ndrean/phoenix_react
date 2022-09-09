@@ -24,7 +24,8 @@ defmodule PhoenixReactWeb.ReactController do
         token = "<script>window.userToken = \"#{user_token}\"</script>\n"
 
         # (@react_dir <> "index.html")
-        (Application.app_dir(:phoenix_react) <> "/" <> @react_dir <> "index.html")
+        # (Application.app_dir(:phoenix_react) <> "/" <>
+        (@react_dir <> "index.html")
         |> File.stream!([], :line)
         |> Enum.reduce("", fn l, file ->
           read_line(l, file, token)
